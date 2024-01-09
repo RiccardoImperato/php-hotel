@@ -53,7 +53,7 @@ $hotels = [
 
     <div class="container">
         <h1 class="text-center my-5">PHP Hotels</h1>
-        <form action="index.php" method="GET">
+        <form class="d-flex gap-3 align-items-center mb-3" action="index.php" method="GET">
             <label for="parking">Parcheggio</label>
             <select name="parking" id="parking">
                 <option>Sì</option>
@@ -61,7 +61,7 @@ $hotels = [
             </select>
             <label for="vote">Voto</label>
             <input type="number" name="vote" id="vote" min="1" max="5">
-            <button class="btn btn-primary" type="button">Filtra</button>
+            <button class="btn btn-primary py-1" type="button">Filtra</button>
         </form>
         <table class="table">
             <thead>
@@ -70,31 +70,24 @@ $hotels = [
                     <th scope="col">Description</th>
                     <th scope="col">Parking</th>
                     <th scope="col">Vote</th>
-                    <th scope="col">Distance to center</th>
+                    <th scope="col">Distance to center (Km)</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                for ($i = 0; $i < count($hotels); $i++) {
-                    echo
-                    "<tr>
-                    <td>
-                        {$hotels[$i]['name']}
-                    </td>
-                    <td>
-                        {$hotels[$i]['description']}
-                    </td>
-                    <td>
-                        {$hotels[$i]['parking']}
-                    </td>
-                    <td>
-                        {$hotels[$i]['vote']}
-                    </td>
-                    <td>
-                        {$hotels[$i]['distance_to_center']} km
-                    </td>
-                </tr>";
-                }
+                foreach ($hotels as $hotel) {
+                    echo '<tr>';
+                    foreach ($hotel as $data) {
+                        if ($data === true) {
+                            echo "<td>Sì</td>";
+                        } elseif ($data === false) {
+                            echo "<td>No</td>";
+                        } else {
+                            echo "<td>$data</td>";
+                        };
+                    };
+                    echo '</tr>';
+                };
                 ?>
             </tbody>
         </table>
